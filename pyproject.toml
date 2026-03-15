@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=42","wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crosscov"
+version = "0.1.0"
+description = "Cross-covariance shrinkage estimator"
+authors = [
+    { name="Paulo H. Ranazzi", email="ranazzi@usp.br" }
+]
+license = { text="BSD-3-Clause" }
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["numpy"]
+keywords = ["covariance", "cross-covariance", "shrinkage", "statistics"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
