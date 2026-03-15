@@ -3,11 +3,6 @@
 Implementation of a shrinkage estimator for cross-covariance matrices.
 
 ## Installation
-
-```
-pip install crosscov-shrinkage
-```
-or
 ```
 pip install git+https://github.com/LASG-USP/crosscov-shrinkage.git
 ```
