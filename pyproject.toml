@@ -7,7 +7,8 @@ name = "crosscov"
 version = "0.1.0"
 description = "Cross-covariance shrinkage estimator"
 authors = [
-    { name="Paulo H. Ranazzi", email="ranazzi@usp.br" }
+    { name="Paulo H. Ranazzi", email="ranazzi@usp.br" },
+    { name = "Marcio A. Sampaio", email = "marciosampaio@usp.br" }
 ]
 license = { text="BSD-3-Clause" }
 readme = "README.md"
