@@ -39,7 +39,7 @@ def compute_localization_approximate(x, n, y=None, ddof=1):
 
     for i in range(C.shape[0]):
         for j in range(C.shape[1]):
-            phi = ((n/(n+2))**2*varx[i]*vary[j])/C[i, j] ** 2
+            phi = (varx[i]*vary[j])/(C[i, j] ** 2)
             P[i, j] = 0 if n < phi else (n-phi)/(n+1)
 
     return P
