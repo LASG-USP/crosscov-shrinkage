@@ -25,21 +25,26 @@ def shrink_cross_covariance(X, Y, ddof=0):
     return alpha* C
 
 
-def compute_localization_approximate(x, n, y=None, ddof=1):
-    n -= ddof
-    if type == 'full':
-        C = np.cov(x, ddof=ddof)
-        varx = np.diag(C)
-        vary = np.diag(C)
-    if y is not None:
-        C = cross_covariance(x, y)
+def compute_localization_approximate(x, y=None, ddof=1):
+    n = x.shape[-1] - ddof
+    if y is None:
+        corr = np.corrcoef(x)
+        varx = np.var(x, axis=-1, ddof=ddof)
+        vary = varx
+    else:
+        cov = cross_covariance(x, y)
         varx = np.var(x, axis=-1, ddof=ddof)
         vary = np.var(y, axis=-1, ddof=ddof)
-    P = np.zeros(C.shape)
 
-    for i in range(C.shape[0]):
-        for j in range(C.shape[1]):
-            phi = (varx[i]*vary[j])/(C[i, j] ** 2)
-            P[i, j] = 0 if n < phi else (n-phi)/(n+1)
+        stdx = np.sqrt(varx)
+        stdy = np.sqrt(vary)
+        corr = cov / np.outer(stdx, stdy)
 
+    eps = 1e-12
+    corr_safe = np.where(np.abs(corr) < eps, eps, corr)
+
+    phi = 1.0 / (corr_safe ** 2)
+    P = np.zeros_like(corr)
+    mask = n >= phi
+    P[mask] = (n - phi[mask]) / (n + 1)
     return P
